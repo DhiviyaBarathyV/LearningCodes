@@ -1,0 +1,57 @@
+openapi: 3.0.1
+info:
+  title: Coupen Api
+  description: Coupen is added here
+  version: "1.0"
+servers:
+- url: http://localhost:8001
+  description: Generated server url
+paths:
+  /hello:
+    get:
+      tags:
+      - book-details-controller
+      operationId: hello
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /bookdetails/{keyword}:
+    get:
+      tags:
+      - book-details-controller
+      operationId: getBookDetails
+      parameters:
+      - name: keyword
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Books'
+components:
+  schemas:
+    Books:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int32
+        bookName:
+          type: string
+        category:
+          type: string
+        author:
+          type: string
+        price:
+          type: string
