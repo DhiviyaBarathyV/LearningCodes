@@ -1,0 +1,97 @@
+---
+openapi: 3.0.1
+info:
+  title: Pen Api service
+  description: pen details
+  version: "1.0"
+servers:
+- url: http://localhost:8000
+  description: pen url
+paths:
+  /savePen:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pen'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Pen'
+  /getAllPen:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pen'
+  /get/{pen}:
+    get:
+      parameters:
+      - name: pen
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pen'
+  /saveShop:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shop'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Shop'
+  /getAllShop:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shop'
+components:
+  schemas:
+    Pen:
+      type: object
+      properties:
+        name:
+          type: string
+        quality:
+          type: string
+        price:
+          type: integer
+    Shop:
+      type: object
+      properties:
+        name:
+          type: string
+        place:
+          type: string
